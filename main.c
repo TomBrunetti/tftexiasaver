@@ -8,23 +8,23 @@ void main()
 	int i = 88;
 	int j;
 	int lap = 0;
-	int x = 80;
-	int y = 20;
+	int x = 60;
+	int y = 1;
 	char ligne[255];
-	FILE *file = fopen ("ex1.pbm","r");
+	FILE *file = fopen ("voiture.pbm","r");
 	
 	while (fgets (ligne, 255, file)!= NULL)
 	{
 	goTo(x, y, lap);
-		for (j=0; j<80; j++)
+		for (j=0; j<255; j++)
 		{
-			if (ligne[j] == '1')
+			if (ligne[j] == '0')
 			{
 				printf("%c", i);
 				lap = 1;
 			}
 		
-			if (ligne[j] == '0')
+			if (ligne[j] == '1')
 			{
 				printf (" ");
 			}
