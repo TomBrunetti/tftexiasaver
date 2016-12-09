@@ -16,7 +16,7 @@ int main()
 	void goto_x_y(unsigned x, unsigned y)
 	{
 	
-		while (fgets (ligne, 255, file)!= NULL)
+		while (fgets (ligne, 255, file)!= NUL)
 		{
 			for (j=0; j<80; j++)
 			{
