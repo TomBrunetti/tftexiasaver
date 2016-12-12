@@ -1,17 +1,18 @@
 #include "statique.h"
+#define fichier "voiture.pbm"
 
 int main(int argc, char *argv[])
 
 {
 system("clear");
 
-FILE *file = fopen("voiture.pbm", "r");
+FILE *file = fopen(fichier, "r");
 int x, y;
 
 taille(file, &x, &y);
 fclose(file);
 
-file = fopen("voiture.pbm", "r");
+file = fopen(fichier, "r");
 afficher(file, x, y);
 system("/bin/stty raw");
 
