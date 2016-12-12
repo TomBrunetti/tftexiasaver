@@ -1,5 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void goTo (int, int, int);
-int taille(char *, int);
+void affichage (int, int, FILE *);
+void taille(FILE *, int *);

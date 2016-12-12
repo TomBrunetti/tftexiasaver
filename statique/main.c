@@ -34,7 +34,7 @@ switch (choix()) // Fonction qui lance le programme correspondant au nombre choi
 		break;
 
 	defaut:
-		printf("Erreur dans le chois du programme\n");
+		printf("Erreur dans le choix du programme\n");
 		break;
 
 }
