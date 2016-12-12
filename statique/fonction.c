@@ -29,17 +29,15 @@ void goTo(int x, int y, int lap) // Fonction qui place l'image, ne retourne rien
 	}
 }
 
-int taille (char *ligne, int loop) // Fonction qui relève la taille donnée dans le fichier, renvoie un entier, prends la ligne du doc et un compteur de tour en arg
+void taille (char *ligne, int *sizeImg) // Fonction qui relève la taille donnée dans le fichier, ne renvoie rien puisque les tableaux marchent comme des pointeurs, prends la ligne du doc et le tableau en argument
 {
 	char taillex[5]; // String de la longueur
 	char tailley[5]; // String de la hauteur
-	int sizeImg[2]; // Tableau de taille en entier
 	int i, j, x, y; /* Déclaration de 4 entiers:
 i est le compteur pour la boucle de la longueur
 j est le compteur de la boucle de la hauteur
 x et la longueur
 y est la hauteur */
-
 	for (i=0; i<50; i++) // Tant que i vaut moins que 50 (valeur un peu aléatoire)
 	{	
 		if (ligne[i] == ' ') // Si le caractère n'est pas un chiffre
@@ -55,8 +53,8 @@ y est la hauteur */
 	}
 
 	i = 0; // On reset i
-		
-	for (j = x; j<50; j++) // Tant que j est inférieur à 50 (là aussi c'est du random)
+	
+	for (j = x + 1; j<50; j++) // Tant que j est inférieur à 50 (là aussi c'est du random)
 	{	
 		if (ligne[j] == ' ' || ligne[j] == '\0' || ligne[j] == '\n') // Si le caractère n'est pas un chiffre
 		{
@@ -76,6 +74,4 @@ y est la hauteur */
 
 	sizeImg[0] = x; // On met la longueur en 1ère position...
 	sizeImg[1] = y; // ... et la hauteur en 2ème
-
-	return sizeImg[loop]; // On return la valeur de la longueur ou de la hauteur selon la valeur de loop
 }
