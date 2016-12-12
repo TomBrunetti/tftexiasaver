@@ -1,37 +1,46 @@
-#include "header.h"
-//[]
-
-void main()
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int choix
 {
-	system ("clear");	
 
-	int i = 88;
-	int j;
-	int lap = 0;
-	int x = 60;
-	int y = 1;
-	char ligne[255];
-	FILE *file = fopen ("voiture.pbm","r");
-	
-	while (fgets (ligne, 255, file)!= NULL)
-	{
-	goTo(x, y, lap);
-		for (j=0; j<255; j++)
-		{
-			if (ligne[j] == '0')
-			{
-				printf("%c", i);
-				lap = 1;
-			}
-		
-			if (ligne[j] == '1')
-			{
-				printf (" ");
-			}
-		}
-	
-	}
+int choixEcran = 0; // La variable qui dépend du choix de l'écran
+const int MAX = 3, int MIN = 1; // Valeur constante qui ne peut être que entre 1 et 3
 
+// Choix de la valeur aléatoire de choixEcran
+srand(time(NULL));
+choixEcran = (rand() % (MAX - MIN + 1)) + MIN;
 
-	fclose(file);	
+return choixEcran;
 }
+
+int main(int argc, char *argv[])
+
+{
+
+switch (choix()) // Fonction qui lance le programme correspondant au nombre choisi (1 pour statique, 2 pour dynamique et 3 pour interactif
+{
+
+	case 1:
+		system(statique.out);
+		break;
+
+	case 2:
+		system(dynamique.out);
+		break;
+
+	case 3:
+		system(interactif.out);
+		break;
+
+	defaut:
+		printf("Erreur dans le chois du programme\n");
+		break;
+
+}
+
+	return 0;
+}
+
+    
+
