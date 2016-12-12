@@ -1,5 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void affichage (int, int, FILE *);
-void taille(FILE *, int *);
+void afficher(FILE *, int, int);
+void taille(FILE *, int*, int*);
