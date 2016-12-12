@@ -24,13 +24,12 @@ void goTo(int x, int y, int lap)
 	}
 }
 
-int *taille (char *ligne)
+int taille (char *ligne, int loop)
 {
 	char taillex[5];
 	char tailley[5];
-	int *sizeImg[2];
-	int i;
-	int j;
+	int sizeImg[2];
+	int i, j, x, y;
 
 	for (i=0; i<50; i++)
 	{	
@@ -48,7 +47,7 @@ int *taille (char *ligne)
 
 	i = 0;
 		
-	while (j<50)
+	for (j = 0; j<50; j++)
 	{	
 		if (ligne[j] == ' ' || ligne[j] == '\0' || ligne[j] == '\n')
 		{
@@ -57,13 +56,17 @@ int *taille (char *ligne)
 		
 		else
 		{
-			taillex[i] = ligne[j];
+			tailley[i] = ligne[j];
 		}
 		
 	i ++;
-	j ++;
 	}
 	
-	sizeImg[0] = atoi(taillew);
-	sizeImg[1] = atoi(tailley);
+	x = atoi(taillex);
+	y = atoi(tailley);
+
+	sizeImg[0] = x;
+	sizeImg[1] = y;
+
+	return sizeImg[loop];
 }

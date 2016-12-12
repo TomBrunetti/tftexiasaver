@@ -6,26 +6,30 @@ void main()
 	system ("clear");	
 
 	int i = 88;
-	int j;
+	int j, posx, posy;
 	int lap = 0;
-	int posx = 60;
-	int posy = 1;
-	int nbligne = 4;
+	int nbligne = 0;
 	char ligne[255];
-	char touche;
+	char touche; // UTILE ?
 	FILE *file = fopen ("voiture.pbm","r");
-	int *sizeImg[2];
+	int sizeImg[2];
 	
 	while (fgets (ligne, 255, file)!= NULL)
 	{
 		
 		if (nbligne == 3)
 		{
-			sizeImg = taille(ligne);
+			sizeImg[lap] = taille(ligne, lap);
+			posx = (178 - sizeImg[0]) / 2;
+			lap ++;
+			sizeImg[lap] = taille(ligne, lap);
+			posy = (54 - sizeImg[1]) / 2;
+			lap = 0;
 		}		
 			
 		if (nbligne >3)
-		{	
+		{
+		goTo(posx, posy, lap);	
 			for (j=0; j<255; j++)
 			{
 				if (ligne[j] == '0')
@@ -50,8 +54,8 @@ void main()
 	{
 		touche = getchar();
 	}
-
-	fclose(file);	
+	
 	system ("/bin/stty cooked");
 	system ("clear");
+	fclose (file);
 }

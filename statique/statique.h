@@ -2,3 +2,4 @@
 #include <stdlib.h>
 
 void goTo (int, int, int);
+int taille(char *, int);
