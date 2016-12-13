@@ -3,7 +3,7 @@
 #include <time.h>
 int choix
 {
-
+system("clear");
 int choixEcran = 0; // La variable qui dépend du choix de l'écran
 const int MAX = 3, int MIN = 1; // Valeur constante qui ne peut être que entre 1 et 3
 
