@@ -1,5 +1,6 @@
 #include "statique.h"
 // On inclut le header
+//[]
 
 //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -139,4 +140,31 @@ void taille(FILE *file, int* x, int* y)
 	*y = atoi(tailleY);
 // Pareil
 }
+
+
+
+
+// ----------------------------------------------------------------------------------//
+
+
+
+
+int alea(int MIN,int MAX)
+// declaration de la fonction choix avec comme argument le mninmum et le maximum
+{
+	int random;
+// La variable qui depend du choix de l'ecran
+
+
+	srand(time(NULL));
+// Stop le temps
+	random = rand() % (MAX-MIN+1) + MIN;
+// Choix de la valeur alC)atoire de choixEcran
+
+	return random;
+// La fonction renvoie la variable choixEcran
+}
+
+
+// --------------------------------------------------------------------------------//
 
