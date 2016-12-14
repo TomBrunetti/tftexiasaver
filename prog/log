@@ -1,0 +1,13 @@
+#Format de chaque ligne avec ;
+#Date format jj/mm/yyyy HH:MM:ss;
+#Niveau 1-statique 2-dynamique 3-ineractif;
+#Si 1, nom du fichier; si 2, taille d'affichage, si 3, position initiale de l'avion sur la console;
+15/12/116 11:15:38;3;
+15/12/116 11:15:50;2;
+15/12/116 11:15:50;2;
+15/12/116 11:15:51;1;
+15/12/116 11:15:53;1;
+15/12/116 11:15:55;3;
+15/12/116 11:15:56;1;
+15/12/116 11:15:58;1;
+15/12/116 11:15:59;1;
