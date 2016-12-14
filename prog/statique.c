@@ -42,6 +42,9 @@ void main()
 		int x, y;
 // Declaration de x et y, position de l'image a l'ecran
 
+		FILE *log = fopen("log", "r+");
+		fputs(name, log);
+
 		taille(file, &x, &y);
 // On appelle la fonction taille avec comme arguments le fichier et les pointeurs de x et y
 		fclose(file);

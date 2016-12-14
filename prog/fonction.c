@@ -1,4 +1,4 @@
-#include "statique.h"
+#include "fonction.h"
 // On inclut le header
 //[]
 

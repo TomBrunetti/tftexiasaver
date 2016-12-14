@@ -1,0 +1,21 @@
+rsrc/escargot.pbm ligne avec ;
+#Date format jj/mm/yyyy HH:MM:ss;
+#Niveau 1-statique 2-dynamique 3-ineractif;
+#Si 1, nom du fichier; si 2, taille d'affichage, si 3, position initiale de l'avion sur la console;
+15/12/116 14:29:0;3;
+15/12/116 14:29:1;2;
+15/12/116 14:29:1;2;
+15/12/116 14:29:2;2;
+15/12/116 14:29:2;2;
+15/12/116 14:29:2;2;
+15/12/116 14:29:4;2;
+15/12/116 14:29:5;3;
+15/12/116 14:29:5;3;
+rsrc/escargot.pbm15/12/116 14:29:7;2;
+15/12/116 14:29:8;3;
+15/12/116 14:29:8;3;
+rsrc/chateau.pbm
+15/12/116 14:43:15;2;
+15/12/116 14:43:15;2;
+15/12/116 14:43:19;3;
+15/12/116 14:43:21;2;
