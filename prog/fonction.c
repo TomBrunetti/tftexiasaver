@@ -16,11 +16,6 @@ void afficher(FILE *file, int x, int y)
 	int ascii = 88;
 // Declaration du code ascii correspondant a "X"
 
-	x = (178 - x) / 2; // 238
-// Calcul du centre de l'ecran en large en fonction de la taille de l'image
-	y = (54 - y) / 2; // 66
-// Pareil pour la hauteur
-
 	for(i = 0; i < y; i++){printf("\n");}
 // On place l'image en hauteur	
 
