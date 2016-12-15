@@ -235,3 +235,82 @@ void statistique(FILE *log)
 
 
 
+
+
+
+
+void tri (FILE *log)
+{
+	system ("touch tri");
+	FILE *tri = fopen("tri", "a+");
+	char ligne[255];
+	int i;
+	int nbligne =0;
+
+        while (fgets (ligne, 255, log) != NULL)
+	{
+		nbligne ++;
+		if (nbligne > 4)
+		{
+			for (i=0, i<strlen(ligne); i++;)
+			{
+				if (ligne[i] == ';')
+				{
+					if(ligne[i+1] == '1')
+					{
+						fputs(ligne, tri);
+					}
+				}
+			}
+		}
+	}
+	
+	fclose(tri);	
+	
+	tri = fopen("tri", "a+");
+	nbligne = 0;
+	while (fgets (ligne, 255, log) != NULL)
+        {
+                nbligne ++;
+                if (nbligne > 4)
+                {
+                        for (i=0, i<strlen(ligne); i++;)
+                        {
+                                if (ligne[i] == ';')
+                                {
+                                        if(ligne[i+1] == '2')
+                                        {
+                                                fputs(ligne, tri);
+                                        }
+                                }
+                        }
+                }
+        }
+
+	fclose(tri);
+	
+	tri = fopen("tri", "a+");
+	nbligne = 0;
+	while (fgets (ligne, 255, log) != NULL)
+        {
+                nbligne ++;
+                if (nbligne > 4)
+                {
+                        for (i=0, i<strlen(ligne); i++;)
+                        {
+                                if (ligne[i] == ';')
+                                {
+                                        if(ligne[i+1] == '3')
+                                        {
+                                                fputs(ligne, tri);
+                                        }
+                                }
+                        }
+                }
+        }
+
+	fclose(tri);
+	
+	system ("cat tri");
+	remove ("tri")
+}

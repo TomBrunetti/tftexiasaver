@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 			int menuChoice = menu();
 			if(menuChoice == 1){system("cat log");}
 			if(menuChoice == 2){statistique(log);}
+			if(menuChoice == 3){tri(log);}
 		}
 	}	
 
@@ -34,21 +35,20 @@ int main(int argc, char *argv[])
 		{
 
 			case 1:
-				execl("/home/fplastina/git/projet/tftexiasaver/prog/statique.out", NULL);//system("./statique.out");//exec("./statique.out");;
-				printf("statique.out\n");
+				execl("/home/fplastina/git/projet/tftexiasaver/prog/statique.out", NULL);
 // si choixEcran vaut 1 alors le programme choisis l'écran statique
 			break;
 // Le programme fait un break
 
 			case 2:
-				printf("dynamique.out\n");//system("./dynamique.out");
+				execl("/home/fplastina/git/projet/tftexiasaver/prog/dynamique.out", NULL);
 // si choixEcran vaut 2 alors le programme choisis l'ecran dynamique
 				sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;\n",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
 				fputs(infolog, log);
 			break;
 
 			case 3:
-				printf("interactif.out\n");//system("./interactif.out");
+				execl("/home/fplastina/git/projet/tftexiasaver/prog/interactif.out", NULL);
 // si choixEcran vaut 3 alors le programme choisis l'ecran interactif
 				sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;\n",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
 				fputs(infolog, log);
