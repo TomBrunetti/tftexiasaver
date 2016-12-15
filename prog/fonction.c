@@ -166,15 +166,72 @@ int alea(int MIN,int MAX)
 
 
 
-void menu()
+int menu()
 
 {
-int choix;
+	int choix;
 
-printf("Choisissez le type d'affichage\n");
-printf("1. Affichage basique\n");
-printf("2. Affichage des statistiques\n");
-printf("3. Affichage trier en fonction du screensaver\n");
-printf("Votre choix ?\t");
-scanf("%d", &choix);
-} 
+	printf("Choisissez le type d'affichage\n1. Affichage basique\n2. Affichage des statistiques\n3. Affichage trier en fonction du screensaver\nVotre choix ?\t");
+	scanf("%d", &choix);
+
+	return choix;
+}
+
+
+
+
+// -----------------------------------------------------------------------------------//
+
+
+void statistique(FILE *log)
+{
+	int nbligne, i, pos;
+	float statique = 0;
+	float dynamique = 0;
+	float interactif = 0;
+	float stats, statd, stati;
+	char ligne[255];
+	char car;
+
+	while (fgets (ligne, 255, log) != NULL)
+	{
+		nbligne ++;
+		pos = 0;
+		if(nbligne > 4)
+		{
+			for(i=0; i<strlen(ligne); i++)
+			{
+				car = ligne[i];
+				if (car == ';'){pos ++;}
+				if (pos == 1 && ligne[i+1] == '1'){statique ++;} 
+				if (pos == 1 && ligne[i+1] == '2'){dynamique ++;} 
+				if (pos == 1 && ligne[i+1] == '3'){interactif ++;}
+				if (pos == 1)
+				{
+					pos = 0;
+					i = 3000;
+				} 
+			} 	
+		}		
+	}
+
+	nbligne = nbligne - 4;
+	
+	stats = (statique/nbligne)*100;
+
+	statd = (dynamique/nbligne)*100;
+
+	stati = (interactif/nbligne)*100;
+
+	printf ("Les statistiques sont les suivantes :\nLe screensaver statique à été lancé %f pour cents des fois\nLe screensaver dynamique à été lancé %f pour cents des fois\nLe screensaver interactif à été lancé %f pour cents des fois\n", stats, statd, stati);
+}
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------//
+
+
+

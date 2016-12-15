@@ -66,6 +66,8 @@ void main()
                 temps = *localtime(&sec);
 // On remplit la structure temporelle
 
+		random = 1;
+
                 sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;%s\n",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random, name);
 // On remplit la chaine de caractere infolog comme suit : jj/mm/yyyy HH:mm:ss;1;nom de l'image lancee
 
