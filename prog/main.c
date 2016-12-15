@@ -16,7 +16,11 @@ int main(int argc, char *argv[])
 
 	if (argv[1] != NULL)
 	{
-		if(strcmp(argv[1], stat) == 0){system("vim log");}
+		if(strcmp(argv[1], stat) == 0)
+		{
+			menu();
+			system("vim log");
+		}
 	}	
 
 	else
@@ -30,6 +34,7 @@ int main(int argc, char *argv[])
 
 			case 1:
 				execl("/home/fplastina/git/projet/tftexiasaver/prog/statique.out", NULL);//system("./statique.out");//exec("./statique.out");;
+				printf("statique.out\n");
 // si choixEcran vaut 1 alors le programme choisis l'écran statique
 			break;
 // Le programme fait un break

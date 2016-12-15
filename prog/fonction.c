@@ -163,3 +163,18 @@ int alea(int MIN,int MAX)
 
 // --------------------------------------------------------------------------------//
 
+
+
+
+void menu()
+
+{
+int choix;
+
+printf("Choisissez le type d'affichage\n");
+printf("1. Affichage basique\n");
+printf("2. Affichage des statistiques\n");
+printf("3. Affichage trier en fonction du screensaver\n");
+printf("Votre choix ?\t");
+scanf("%d", &choix);
+} 

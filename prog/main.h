@@ -5,3 +5,4 @@
 #include <string.h>
 
 int alea(const int, const int);
+void menu();
