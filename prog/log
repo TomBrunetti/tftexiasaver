@@ -1,4 +1,6 @@
-#Format de la ligne avec ;
+16/12/116 12:53:2;2;
+
+ec ;
 #Heur au format jj/mm/yyyy HH:MM:ss;
 #Niveau 1-statique 2-dynamique 3-ineractif;
 #Si 1, nom du fichier; si 2, taille d'affichage, si 3, position initiale de l'avion sur la console;
@@ -18,3 +20,11 @@
 16/12/116 12:8:20;1;rsrc/logoexia.pbm
 16/12/116 12:29:53;1;rsrc/fuse.pbm
 16/12/116 12:30:0;1;rsrc/voiture.pbm
+16/12/116 12:49:24;1;rsrc/logoexia.pbm
+16/12/116 12:49:31;1;rsrc/escargot.pbm
+16/12/116 12:49:34;1;rsrc/escargot.pbm
+16/12/116 12:49:36;1;rsrc/fuse.pbm
+16/12/116 12:50:32;1;rsrc/logoexia.pbm
+16/12/116 12:52:46;1;rsrc/voiture.pbm
+16/12/116 12:53:1;1;rsrc/voiture.pbm
+16/12/116 12:53:3;1;rsrc/voiture.pbm

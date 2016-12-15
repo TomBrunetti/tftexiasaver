@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 // Le programme fait un break
 
 			case 2:
-				execl("/home/fplastina/git/projet/tftexiasaver/prog/dynamique.out", NULL);
+				execl("/home/fplastina/git/projet/tftexiasaver/prog/dynamique", NULL);
 // si choixEcran vaut 2 alors le programme choisis l'ecran dynamique
 				sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;\n",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
 				fputs(infolog, log);
