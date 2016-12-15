@@ -22,10 +22,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		time(&sec);
-		temps = *localtime(&sec);
-
-		sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;\n",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
-		fputs(infolog, log);	
+		temps = *localtime(&sec);	
 
 		switch (random)
 // Fonction qui lance le programme correspondant au nombre choisi (1 pour statique, 2 pour dynamique et 3 pour interactif
@@ -40,11 +37,15 @@ int main(int argc, char *argv[])
 			case 2:
 				printf("dynamique.out\n");//system("./dynamique.out");
 // si choixEcran vaut 2 alors le programme choisis l'ecran dynamique
+				sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
+				fputs(infolog, log);
 			break;
 
 			case 3:
 				printf("interactif.out\n");//system("./interactif.out");
 // si choixEcran vaut 3 alors le programme choisis l'ecran interactif
+				sprintf(infolog, "%d/%d/%d %d:%d:%d;%d;",temps.tm_mday + 1, temps.tm_mon + 1, temps.tm_year, temps.tm_hour, temps.tm_min, temps.tm_sec, random);
+				fputs(infolog, log);
 			break;
 
 			defaut:
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
 			break;
 
 		}
+		fprintf(log, "\n");	
 	}
 
 	return 0;
