@@ -6,3 +6,4 @@
 // Bibliotheque de gestion du temps
 #include <string.h>
 // Bibliotheque de gestion de chaine de caractere
+#include <unistd.h>

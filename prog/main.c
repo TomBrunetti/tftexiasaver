@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 	system("clear");
 // On nettoie la console
 
-	FILE *log = fopen("log","a+");
+	FILE *log = fopen("log","r+");
 	time_t sec;
 	struct tm temps;
 	char infolog[255];

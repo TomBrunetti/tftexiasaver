@@ -241,76 +241,195 @@ void statistique(FILE *log)
 
 void tri (FILE *log)
 {
-	system ("touch tri");
-	FILE *tri = fopen("tri", "a+");
 	char ligne[255];
 	int i;
-	int nbligne =0;
 
         while (fgets (ligne, 255, log) != NULL)
 	{
-		nbligne ++;
-		if (nbligne > 4)
-		{
-			for (i=0, i<strlen(ligne); i++;)
+			for (i=0, i<255; i++;)
 			{
 				if (ligne[i] == ';')
 				{
 					if(ligne[i+1] == '1')
 					{
-						fputs(ligne, tri);
+						printf("%s\n", ligne);
 					}
+
+					i = 3000;	
 				}
 			}
-		}
 	}
+	fclose(log);
 	
-	fclose(tri);	
-	
-	tri = fopen("tri", "a+");
-	nbligne = 0;
+	log = fopen("log", "r");
 	while (fgets (ligne, 255, log) != NULL)
         {
-                nbligne ++;
-                if (nbligne > 4)
-                {
-                        for (i=0, i<strlen(ligne); i++;)
+                        for (i=0, i<255; i++;)
                         {
                                 if (ligne[i] == ';')
                                 {
                                         if(ligne[i+1] == '2')
                                         {
-                                                fputs(ligne, tri);
+						printf("%s\n", ligne);
                                         }
                                 }
-                        }
-                }
-        }
 
-	fclose(tri);
+				i = 3000;	
+                        }
+        }
+	fclose(log);
 	
-	tri = fopen("tri", "a+");
-	nbligne = 0;
+	log = fopen("log", "r");
 	while (fgets (ligne, 255, log) != NULL)
         {
-                nbligne ++;
-                if (nbligne > 4)
-                {
-                        for (i=0, i<strlen(ligne); i++;)
+                        for (i=0, i<255; i++;)
                         {
                                 if (ligne[i] == ';')
                                 {
                                         if(ligne[i+1] == '3')
                                         {
-                                                fputs(ligne, tri);
+						printf("%s\n", ligne);
                                         }
                                 }
-                        }
-                }
-        }
 
-	fclose(tri);
-	
-	system ("cat tri");
-	remove ("tri")
+				i = 3000;	
+                        }
+        }
+	fclose(log);
 }
+
+
+
+
+
+
+
+// --------------------------------------------------------------------//
+
+
+void afficherHeure(FILE* fichier,int posX,int posY)// Affichage de l'image aux cordonnées X et Y 
+{
+        int i=0;
+        int n=35; //35 == # en ASCII sur cette version
+        char ligne[255];
+        int autorisation=0; // la variable autorisation va nous permetttre de ne pas lire les 3 premières lignes du fichier cf en dessous
+
+        system("clear"); //on suprime le contenu de la console
+
+        for (i=0; i<posY; i++)//nombre de retour a la ligne pour le positionnement de l'image en Y
+                {
+                printf("\n");
+                }
+
+        while (fgets(ligne, 255, fichier)!=NULL) //pour chaques lignes du fichier tant qu'il y a des caractères
+        {
+                autorisation++; // incrémentation de autorisation pour chaque ligne
+
+                if (autorisation>3) // Si les 3 premières lignes du fichier on était lu alors on fait ce qui est en dessous (modification)
+                        {
+                        for (i=0; i<posX; i++)//nombre d'espaces pour le positionnement de l'image en X
+                                {
+                                printf(" ");
+                                }
+
+
+                        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------//
+
+
+FILE* switchFichierHeure(int valeur)
+{
+        switch(valeur)
+                {
+                        case 0:
+                        return fopen("rsrc/0.pbm","r");
+                        break;
+
+                        case 1:
+                        return fopen("rsrc/1.pbm","r");
+                        break;
+
+                        case 2:
+                        return fopen("rsrc/2.pbm","r");
+                        break;
+
+                        return fopen("rsrc/3.pbm","r");
+                        break;
+
+                        case 4:
+                        return fopen("rsrc/4.pbm","r");
+                        break;
+
+                        case 5:
+                        return fopen("rarc/5.pbm","r");
+                        break;
+
+                        case 6:
+                        return fopen("rsrc/6.pbm","r");
+                        break;
+
+                        case 7:
+                        return fopen("rsrc/7.pbm","r");
+                        break;
+
+                        case 8:
+                        return fopen("rsrc/8.pbm","r");
+                        break;
+
+                        case 9:
+                        return fopen("rsrc/9.pbm","r");
+                        break;
+                }
+
+}
+
+
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+
+void actualisation(int posX)
+{
+int i =0 ;
+int c = 0;
+int var = 10;
+        for (i=0; i<posX; i++)//nombre de retour a la ligne pour le positionnement de l'image en Y
+                {
+                printf(" ");
+                }
+        printf("L'heure vas s'actualiser dans %d secs : \n",var);
+
+        while(c!=var)
+                {
+                for (i=0; i<posX; i++)//nombre de retour a la ligne pour le positionnement de l'image en Y
+                        {
+                        printf(" ");
+                        }
+                printf(".\n");
+                c++;
+
+                sleep(1);
+                }
+}}
+

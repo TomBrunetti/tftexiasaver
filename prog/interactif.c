@@ -22,30 +22,30 @@ void main()
 		
 		if(move =='h' || z == 1)
 		{
-			x = x - 1;
 			fclose(plane);
+			x = x - 1;
 			plane = fopen("rsrc/avionhaut.pbm", "r");
 			
 		}
 
 		else if(move =='b' || z == 2)
 		{
-			x = x + 1;
 			fclose(plane);
+			x = x + 1;
 			plane = fopen("rsrc/avionbas.pbm", "r");
 		}
 
 		else if(move =='g' || z == 3)
 		{
-			y = y - 1;
 			fclose(plane);
+			y = y - 1;
 			plane = fopen("rsrc/aviongauche.pbm", "r");
 		}
 
 		else if(move =='d' || z == 4)
 		{
-			y = y + 1;
 			fclose(plane);
+			y = y + 1;
 			fopen("rsrc/aviondroite.pbm", "r");
 		}
 		afficher(plane, x, y);		
