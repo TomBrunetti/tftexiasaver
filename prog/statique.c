@@ -2,7 +2,8 @@
 // On inclut le header
 #define fichier "rsrc/voiture.pbm"
 // On cree une valeur globale pour changer l'image a cet endroit seulement
-//[]
+//
+//
 
 void main()
 // Fonction principale
@@ -18,6 +19,7 @@ void main()
 	if(pid == 0)
 // Si le pid est egale a 0, donc on est dans le processus fils
 	{
+
 		time_t sec;
 // On initialise sec, qui releve le nombre de secondes ecoulees depuis janvier 1970
 
@@ -33,10 +35,14 @@ void main()
 		int max = 5;
 // Pareil pour le maximum
 
+		int i = 0;
+
+		DIR *rsrc;
+
 		int random = alea(min, max);
 // On prend un chiffre aleatoire entre min et max inclus, definis plus haut
 
-		char name[50];
+		char name[225];
 // On cree la chaine de caractere qui contiendra le nom de l'image
 
 		if(random == 1){sprintf(name, "rsrc/voiture.pbm");}
@@ -54,13 +60,16 @@ void main()
 	        if(random == 5){sprintf(name, "rsrc/logoexia.pbm");}
 // Si random vaut 5, l'image est le loge exia	
 
-		FILE *file = fopen(name,"r");
-// On ouvre l'image en lecture seule
 		int x, y;
 // Declaration de x et y, position de l'image a l'ecran
 
 		FILE *log = fopen("log", "a+");
-// On ouvre le fichier log en mode ajout +
+
+		rsrc = opendir("rsrc/");
+
+		FILE *file = fopen(name,"r");
+// On ouvre l'image en lecture seule
+
 		time(&sec);
 // On releve le temps
                 temps = *localtime(&sec);
@@ -78,13 +87,15 @@ void main()
 // On appelle la fonction taille avec comme arguments le fichier et les pointeurs de x et y
 		fclose(file);
 // On ferme le fichier
+		closedir(rsrc);
 
+		rsrc = opendir("rsrc/");
 		file = fopen(name,"r");
 // On le rouvre
 
 		x = (178 - x) / 2;
 // Calcul du centre de l'ecran en longueur en fonction de la taille de l'image
-		y = (54 - y) / 2;
+		y = (52 - y) / 2;
 // Pareil pour y
 
 		afficher(file, x, y);
@@ -92,6 +103,7 @@ void main()
 
 		fclose(file);
 // On ferme le fichier
+		closedir(rsrc);
 	}
 
 	else

@@ -10,6 +10,8 @@
 // Bibliotheque utilisee pour importer divers types et structure, le fork ici
 #include <time.h>
 // Bibliotheque de gestion du temps
+#include <dirent.h>
+// Gestion des dossiers
 
 void afficher(FILE *, int, int);
 // Fonction qui affiche une image, ne renvoie rien, prend le fichier image, x et y en argument

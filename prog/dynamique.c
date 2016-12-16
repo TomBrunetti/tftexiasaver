@@ -1,85 +1,589 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <time.h>
-#include "fonction.c"
+#include "dynamique.h"
+//[]
 
 void main()
 {
+	system("clear");
+	
+	int continuer = 1;
+	int i, j;
+	time_t sec;
+	struct tm temps;
+	char strHeure[2];
+	char strMin[2];
+	char strSec[2];
+	char name[20];
+	char ligne[255] = "\0";
+	char dessin[255] = "\0";
+	char space[255] = "\0";
+	char ligne1[255] = "\0";
+	char ligne2[255] = "\0";
+	char ligne3[255] = "\0";
+	char ligne4[255] = "\0";
+	char ligne5[255] = "\0";
+	char save;
+	FILE * dizh;
+	FILE * unith;	
+	FILE * dizm;
+	FILE * unitm;
+	FILE * dizs;
+	FILE * units;
+	FILE * dot;
+	
+	for(i = 0; i < 70; i++){sprintf (space, "%s ", space);}
+	for(i = 0; i<20; i++){printf("\n");}
 
-	time_t temps;
-	typedef struct tm tm;
-	tm date;
+	while(continuer)
+{
+	dot = fopen("rsrc/deuxPoints.pbm","r");
+	time (&sec);
+	temps = *localtime(&sec);
+	sprintf (strHeure, "%d", temps.tm_hour);
+	if (strlen(strHeure) == 1)
+	{
+		save = strHeure[0];
+		sprintf(strHeure, "0%c", save);
+	}
+	sprintf (strMin, "%d", temps.tm_min);
+	if (strlen(strMin) == 1)
+	{
+		save = strMin[0];
+		sprintf(strMin, "0%c", save);
+	}
+	sprintf (strSec, "%d", temps.tm_sec);
+	if (strlen(strSec) == 1)
+	{
+		save = strSec[0];
+		sprintf(strSec, "0%c", save);
+	}
 
-	struct winsize w; //structure pour la largeur de la fenetre
+	for(i=0; i<2; i++)
+	{
+		save = strHeure[i];
+		sprintf (name, "rsrc/%c.pbm", save);
+		if (i == 0){dizh = fopen(name, "r");}
+		if (i == 1){unith = fopen(name, "r");}
+	}
 
-	int c =0;
+	for(i=0; i<2; i++)
+	{
+		save = strMin[i];
+		sprintf (name, "rsrc/%c.pbm", save);
+		if (i == 0){dizm = fopen(name, "r");}
+		if (i == 1){unitm = fopen(name, "r");}
+	}
+	
+	for(i=0; i<2; i++)
+	{
+		save = strSec[i];
+		sprintf (name, "rsrc/%c.pbm", save);
+		if (i == 0){dizs = fopen(name, "r");}
+		if (i == 1){units = fopen(name, "r");}
+	}
 
-	int continuer=1;
-	int xImg, yImg, xImg2, yImg2 ;
-	int longueur=31;
-	int largeur=8;
-	int taille;
-	int i;
-	int f=0;
 
-	int dizHeure;
-	int unitHeure;
-	int dizMin;
-	int unitMin;
-	int dizSec;
-	int unitSec;
-
-	taille=alea(1,4);
-	if (taille==2)
+	i = 0;
+	while (fgets (ligne, 255, dizh) != NULL)
+	{
+		i++;
+		if (i == 5)
 		{
-		longueur=62;
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s%s",space, dessin); 
 		}
+		sprintf(dessin, "\0");	
 
-
-	while (continuer)
+		if (i == 6)
 		{
-		time(&temps);
-		date=*localtime(&temps);
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s%s",space, dessin); 
+		}	
+		sprintf(dessin, "\0");	
 
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s%s",space, dessin); 
+		}	
+		sprintf(dessin, "\0");	
 
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s%s",space, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s%s",space, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
 
-		ioctl(1, TIOCGWINSZ, &w); //fonction mettant dans les variable ws_row et ws_col la taille de la fenetre//
-		yImg=(w.ws_row-largeur)/2; //calcul de la position de l'image en X
-		xImg=(w.ws_col-longueur)/2; //calcul de la position de l'image en Y
-		yImg2=(w.ws_row-largeur)/2; //calcul de la position de l'image en X
-		xImg2=(w.ws_col-longueur)/2; //calcul de la position de l'image en Y
-
-		//On divise par 10 pour avoir les dizaines et par modulo (reste) pour avoir les unité de HH:MM:SS
-		dizHeure=date.tm_hour/10;
-		unitHeure=date.tm_hour%10;
-		dizMin=date.tm_min/10;
-		unitMin=date.tm_min%10;
-		dizSec=date.tm_sec/10;
-		unitSec=date.tm_sec%10;
-
-		//En fonction du résultat on ouvre le bon fichier pbm (soit le chiffre 1,2,3 etc..)
-		FILE* num0=switchFichierHeure(dizHeure);
-		FILE* num1=switchFichierHeure(unitHeure);
-		FILE* num2=switchFichierHeure(dizMin);
-		FILE* num3=switchFichierHeure(unitMin);
-		FILE* num4=switchFichierHeure(dizSec);
-		FILE* num5=switchFichierHeure(unitSec);
-		FILE* deuxPoints=fopen("rsrc/:.pbm", "r");
-
-		//On récupère toutes les données dans la fonction d'affichage qui affichera l'heure au format HH:MM:SS et centré 
-		afficherHeure(deuxPoints, num0, num1, num2, num3, num4, num5, xImg, yImg, taille);
-		actualisation(xImg2);
-
-		fclose(num0);
-		fclose(num1);
-		fclose(num2);
-		fclose(num3);
-		fclose(num4);
-		fclose(num5);
-		fclose(deuxPoints);
-
+	i = 0;
+	while (fgets (ligne, 255, unith) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
 		}
+		sprintf(dessin, "\0");	
 
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+
+	i = 0;
+	while (fgets (ligne, 255, dot) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+	i = 0;
+	while (fgets (ligne, 255, dizm) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+	i = 0;
+	while (fgets (ligne, 255, unitm) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+	fclose(dot);
+	dot = fopen("rsrc/deuxPoints.pbm", "r");
+
+	i = 0;
+	while (fgets (ligne, 255, dot) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+	i = 0;
+	while (fgets (ligne, 255, dizs) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+
+	i = 0;
+	while (fgets (ligne, 255, units) != NULL)
+	{
+		i++;
+		if (i == 5)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne1, "%s  %s",ligne1, dessin); 
+		}
+		sprintf(dessin, "\0");	
+
+		if (i == 6)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne2, "%s  %s",ligne2, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 7)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne3, "%s  %s",ligne3, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+
+		if (i == 8)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne4, "%s  %s",ligne4, dessin); 
+		}	
+		sprintf(dessin, "\0");
+	
+		if (i == 9)
+		{
+			for(j = 0; j<255; j++)
+			{
+				if (ligne[j] == '1'){sprintf(dessin, "%s#", dessin);}
+				if (ligne[j] == '0'){sprintf(dessin, "%s ", dessin);}
+			}
+			sprintf (ligne5, "%s  %s",ligne5, dessin); 
+		}	
+		sprintf(dessin, "\0");	
+	}
+	
+	fclose(dizh);
+	fclose(unith);
+	fclose(dizm);
+	fclose(unitm);
+	fclose(dizs);
+	fclose(units);
+	
+	printf("%s\n%s\n%s\n%s\n%s\n", ligne1, ligne2, ligne3, ligne4, ligne5);
+	for (i=0; i<15; i++){printf("\n");}
+	for (i=0; i<69; i++){printf(" ");}
+	for (i=0; i<90; i++){sprintf(dessin, "%s ", dessin);}
+	puts("Cette image sera actualisée dans 10 secondes");
+	for (i=0; i<10; i++)
+	{	
+		printf("%s", dessin);
+		puts(" .");
+		sleep (1);
+	}
+	system("clear");
+	for(i = 0; i<20; i++){printf("\n");}	
 }}
